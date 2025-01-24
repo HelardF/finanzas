@@ -20,15 +20,18 @@ class IncomeController
     public function store($data){
         $connection = Connection::getInstance()->get_database_instance();
 
-        $affected_rows = $connection->exec("INSERT INTO incomes (paymentMethod, type, date, amount, description) VALUES (
-              {$data['paymentMethod']},
-              {$data['type']},
-              '{$data['date']}', 
-              {$data['amount']},
-              '{$data['description']}'
-                                                                                
-        )"
+        $stmt = $connection->prepare("INSERT INTO incomes 
+                (paymentMethod, type, date, amount, description) 
+                VALUES ( :paymentMethod, :type, :date, :amount, :description )"
         );
+
+        $stmt->bindParam(':paymentMethod', $data['paymentMethod']);
+        $stmt->bindParam(':type', $data['type']);
+        $stmt->bindParam(':date', $data['date']);
+        $stmt->bindParam(':amount', $data['amount']);
+        $stmt->bindParam(':description', $data['description']);
+
+        $affected_rows =$stmt ->execute($data);
         echo "se han registrado # $affected_rows correctamente";
 
     }

@@ -5,13 +5,13 @@
 
     require ('vendor/autoload.php');
 
-    $incomeController = new IncomeController();
-    $incomeController->store([
-        "paymentMethod" => 1,
-        "type" =>1,
-        "date" => date("Y-m-d H:i"),
-        "amount" => 10000.50,
-        "description" => "ingresos mensuales de enero",
-
-    ]);
+//    $incomeController = new IncomeController();
+//    $incomeController->store([
+//        "paymentMethod" => 5,
+//        "type" =>2,
+//        "date" => date("Y-m-d H:i"),
+//        "amount" => 750,
+//        "description" => "ingreso de enero",
+//
+//    ]);
 
