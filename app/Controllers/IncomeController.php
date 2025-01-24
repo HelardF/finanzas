@@ -6,9 +6,18 @@ use Database\PDO\Connection;
 class IncomeController
 
 {
-
+    protected $connection;
+    public function __construct()
+    {
+        $this->connection = Connection::getInstance()->get_database_instance();
+    }
     //muestra la lista de los recursos
     public function index(){
+        $stmt = $this->connection->prepare("SELECT * FROM incomes");
+        $stmt->execute();
+        $incomes = $stmt->fetchAll();
+        var_dump($incomes);
+
 
     }
     //muestra un formulario para crear un nuevo recurso
@@ -18,9 +27,8 @@ class IncomeController
     }
     //Guarda un nuevo recurso en la base de datos
     public function store($data){
-        $connection = Connection::getInstance()->get_database_instance();
 
-        $stmt = $connection->prepare("INSERT INTO incomes 
+        $stmt = $this->connection->prepare("INSERT INTO incomes 
                 (paymentMethod, type, date, amount, description) 
                 VALUES ( :paymentMethod, :type, :date, :amount, :description )"
         );
@@ -37,8 +45,14 @@ class IncomeController
     }
 
     //muestra un recurso especificado
-    public function show()
+    public function show($id)
     {
+        $stmt = $this->connection->prepare("SELECT * FROM incomes WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $income = $stmt->fetch();
+        echo "se recibio el ingreso de {$income['amount']} por concepto de {$income['description']}";
+
 
     }
 
@@ -53,8 +67,12 @@ class IncomeController
 
     }
     //Elimina de la base de datos el recurso especificado
-    public function destroy()
+    public function destroy($id)
     {
+        $stmt = $this->connection->prepare("DELETE FROM incomes WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        echo "se elimino # $id";
 
     }
 
