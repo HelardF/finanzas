@@ -39,5 +39,16 @@ require ('vendor/autoload.php');
 //    $withdrawal = new WithdrawalController();
 //    $withdrawal->show(2);
 
+//    $income=new IncomeController();
+//    $income->destroy(15);
+
     $income=new IncomeController();
-    $income->destroy(15);
+    $income->update([
+        "paymentMethod" => PaymentMethodEnum::Cash->value,
+        "type" => IncomeTypeEnum::Income->value,
+        "date" => date("Y-m-d H:i"),
+        "amount" => 6000,
+        "description" => "otros ingresos",
+        "id" => 1
+
+    ]);

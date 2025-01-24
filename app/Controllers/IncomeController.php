@@ -62,8 +62,24 @@ class IncomeController
 
     }
     //Actualiza los datos de un recurso especificado
-    public function update()
+    public function update($data)
     {
+        $stmt = $this->connection->prepare("UPDATE incomes SET 
+                   paymentMethod = :paymentMethod,
+                   type = :type,
+                   date = :date,
+                   amount = :amount,
+                   description = :description
+                   Where id = :id");
+        $stmt->bindParam(':paymentMethod', $data['paymentMethod']);
+        $stmt->bindParam(':type', $data['type']);
+        $stmt->bindParam(':date', $data['date']);
+        $stmt->bindParam(':amount', $data['amount']);
+        $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':id', $data['id']);
+        $affected_rows =$stmt ->execute($data);
+        echo "se han actualizado # $affected_rows correctamente";
+
 
     }
     //Elimina de la base de datos el recurso especificado
