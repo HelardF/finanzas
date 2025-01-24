@@ -1,0 +1,15 @@
+{
+    "name": "senati/finanzas",
+    "description": "programa para control de finanzas personales",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Database\\": "database",
+            "App\\": "app"
+        }
+    },
+    "require": {
+      "ext-mysqli": "*"
+    }
+}
