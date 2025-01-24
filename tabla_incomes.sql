@@ -1,0 +1,1 @@
+CREATE TABLE `finanzas`.`incomes` (`id` INT(20) UNSIGNED NOT NULL AUTO_INCREMENT , `paymentMethod` TINYINT(2) NOT NULL , `type` TINYINT(2) NOT NULL , `date` TIMESTAMP NOT NULL , `amount` FLOAT NOT NULL , `description` TEXT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
